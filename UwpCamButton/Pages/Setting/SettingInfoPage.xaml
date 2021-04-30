@@ -1,0 +1,63 @@
+﻿<Page
+    x:Class="UwpCamButton.Pages.Setting.SettingInfoPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:UwpCamButton.Pages.Setting"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"  
+    Width="1110" 
+    Height="554" 
+    Foreground="White" 
+    FontSize="30">
+
+    <Grid Background="Black">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+        </Grid.ColumnDefinitions>
+        <Grid x:Name="First" Grid.Row="0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="50" />
+            <ColumnDefinition Width="150"/>
+            <ColumnDefinition Width="130"/>
+            <ColumnDefinition Width="635"/>
+        </Grid.ColumnDefinitions>
+            <TextBlock Grid.Column="1" Name="txbDate"   Text="Date"          Margin="10,0,0,0" Width="auto"/>
+            <TextBlock Grid.Column="2" Name="txbName"   Text="Name"          Margin="10,0,0,0" Width="auto"/>
+            <TextBlock Grid.Column="3" Name="txbDevice" Text="Description"   Margin="10,0,0,0" Width="auto"/>
+        </Grid>
+        <Grid x:Name="Second" Grid.Row="1">
+            <ListView x:Name="lswActivities" ItemsSource="{x:Bind listActivities2}" Foreground="White" Background="Black">
+                <!--DisplayMemberPath="ListText"-->
+                <ListView.ItemTemplate>
+                    <DataTemplate >
+                        <Grid Width="{Binding ElementName=listActivities2 , Path=ActualWidth}" >
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="50" />
+                                <ColumnDefinition Width="150"/>
+                                <ColumnDefinition Width="130"/>
+                                <ColumnDefinition Width="635"/>
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock Grid.Column="1" Text="{Binding Path=DateAction}"     Width="auto" FontSize="16" Foreground="White"/>
+                            <TextBlock Grid.Column="2" Text="{Binding Path=Name}"           Width="auto" FontSize="18" Foreground="White"/>
+                            <TextBlock Grid.Column="3" Text="{Binding Path=Description}"    Width="auto" Height="auto" FontSize="18" Foreground="White"/>
+                        </Grid>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </Grid>
+    </Grid>
+</Page>
