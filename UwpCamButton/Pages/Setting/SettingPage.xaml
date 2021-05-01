@@ -63,6 +63,5 @@
                 <Button x:Name="btnSettingInfoPage" Content="List info" Tag="SettingInfo" Style="{StaticResource ButtonStyle}" Click="btnSettingInfoPage_Click"/>
             </StackPanel>
         </Grid>
-
     </Grid>
 </Page>

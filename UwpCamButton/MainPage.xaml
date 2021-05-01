@@ -27,6 +27,13 @@
             <Setter Property="IsHoldingEnabled" Value="False"/>
             <Setter Property="IsDoubleTapEnabled" Value="False"/>
         </Style>
+
+        <Style x:Name="btnStyle"
+               TargetType="Button"
+               BasedOn="{StaticResource ButtonStyle}" >
+            <Setter Property="HorizontalAlignment"
+                    Value="Center" />
+        </Style>
     </Page.Resources>
 
     <Grid x:Name="MainGrid"
@@ -99,49 +106,42 @@
                     <Button x:Name="btnInfo"
                             Tag="Info"
                             Content="Info and tutorial"
-                            Style="{StaticResource ButtonStyle}"
+                            Style="{StaticResource btnStyle}"
                             Click="btnSelectView_Click"
-                            Visibility="Collapsed"
-                            HorizontalAlignment="Center" />
+                            Visibility="Collapsed"/>
                     <Button x:Name="btnTutorial"
                             Tag="Tutorial"
                             Content="Tutorial"
-                            Style="{StaticResource ButtonStyle}"
+                            Style="{StaticResource btnStyle}"
                             Click="btnSelectView_Click"
-                            Visibility="Collapsed"
-                            HorizontalAlignment="Center" />
+                            Visibility="Collapsed"/>
                     <Button x:Name="btnLoadData"
                             Tag="SelectionImport"
                             Content="Kamera"
-                            Style="{StaticResource ButtonStyle}"
-                            Click="btnSelectView_Click"
-                            HorizontalAlignment="Center"
-                            Visibility="Collapsed" />
+                            Style="{StaticResource btnStyle}"
+                            Click="btnSelectView_Click"/>
                     <Button x:Name="btnEditPhoto"
                             Tag="EditPhoto"
                             Content="Edit photo"
-                            Style="{StaticResource ButtonStyle}"
+                            Style="{StaticResource btnStyle}"
                             Click="btnSelectView_Click"
-                            Visibility="Collapsed"
-                            HorizontalAlignment="Center" />
+                            Visibility="Collapsed"/>
                     <Button x:Name="btnSettingPrint"
                             Tag="SettingPrint"
                             Content="Setting print"
-                            Style="{StaticResource ButtonStyle}"
+                            Style="{StaticResource btnStyle}"
                             Click="btnSelectView_Click"
-                            Visibility="Collapsed"
-                            HorizontalAlignment="Center" />
+                            Visibility="Collapsed"/>
                     <Button x:Name="btnRecapitulation"
                             Tag="Recapitulation"
                             Content="Souhrn"
-                            Style="{StaticResource ButtonStyle}"
+                            Style="{StaticResource btnStyle}"
                             Click="btnSelectView_Click"
-                            Visibility="Collapsed"
-                            HorizontalAlignment="Center" />
+                            Visibility="Collapsed" />
                     <Button x:Name="btnSettingInfo"
                             Tag="SettingInfo"
                             Content="SettingInfo"
-                            Style="{StaticResource ButtonStyle}"
+                            Style="{StaticResource btnStyle}"
                             Click="btnSelectView_Click"
                             Visibility="Collapsed" />
                     <!--!menu pro výběr funkcionality-->
@@ -159,7 +159,9 @@
                                HorizontalAlignment="Center"
                                VerticalAlignment="Bottom"
                                FontSize="32">
-                         <Run Text="1 Magnetek" /><LineBreak /><Run  Text="=" /> <LineBreak /><Run Text="1 Kč pro českou přírodu" />
+                        <Run Text="1 Magnetek" /><LineBreak />
+                        <Run Text="=" /> <LineBreak />
+                        <Run Text="1 Kč pro českou přírodu" />
                     </TextBlock>
                     <Button x:Name="btnSetting"
                             Tag="Setting"

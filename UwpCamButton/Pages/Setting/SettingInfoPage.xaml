@@ -53,7 +53,7 @@
 
                             <TextBlock Grid.Column="1" Text="{Binding Path=DateAction}"     Width="auto" FontSize="16" Foreground="White"/>
                             <TextBlock Grid.Column="2" Text="{Binding Path=Name}"           Width="auto" FontSize="18" Foreground="White"/>
-                            <TextBlock Grid.Column="3" Text="{Binding Path=Description}"    Width="auto" Height="auto" FontSize="18" Foreground="White"/>
+                            <TextBlock Grid.Column="3" Text="{Binding Path=Description}"    Width="auto" FontSize="18" Foreground="White"/>
                         </Grid>
                     </DataTemplate>
                 </ListView.ItemTemplate>

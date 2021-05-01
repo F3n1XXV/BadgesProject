@@ -14,8 +14,10 @@
                 <Setter.Value>
                     <ControlTemplate TargetType="Custom:CameraPreview" >
                         <Grid>
-                            <Ellipse Margin="4" Fill="{TemplateBinding Background}"/>
-                            <Ellipse Margin="20" Fill="{TemplateBinding Background}"/>
+                            <Ellipse Margin="4" 
+                                     Fill="{TemplateBinding Background}"/>
+                            <Ellipse Margin="20" 
+                                     Fill="{TemplateBinding Background}"/>
                             <ContentPresenter x:Name="content" 
                                               HorizontalAlignment="Center" 
                                               VerticalAlignment="Center"/>
@@ -54,8 +56,14 @@
                 </Path.Data>
             </Path>
             <!--<StackPanel x:Name="Timer" VerticalAlignment="Center" HorizontalAlignment="Center">-->
-            <TextBlock x:Name="txbTimerCykle" Text="5" Style="{StaticResource txtStyleTimer}"/>
-            <Button Content="Vyfotit" x:Name="BtnCapture" Template="{StaticResource ButtonTemplate}" Click="BtnCapture_Click" HorizontalAlignment="Center"/>
+            <TextBlock x:Name="txbTimerCykle" 
+                       Text="5" 
+                       Style="{StaticResource txtStyleTimer}"/>
+            <Button Content="Vyfotit" 
+                    x:Name="BtnCapture" 
+                    Template="{StaticResource ButtonTemplate}" 
+                    Click="BtnCapture_Click" 
+                    HorizontalAlignment="Center"/>
             <!--</StackPanel>-->
 
         </Grid>
@@ -67,8 +75,16 @@
                     <RowDefinition Height="auto"/>
                 </Grid.RowDefinitions>
                 <Grid Grid.Column="0" Grid.Row="0">
-                    <Button Content="Start" x:Name="BtnStart" Style="{StaticResource ButtonStyle}" Click="BtnStart_Click" Visibility="Collapsed"/>
-                    <Button Content="Stop" x:Name="Stop" Style="{StaticResource ButtonStyle}" Click="Stop_Click" Visibility="Collapsed"/>
+                    <Button Content="Start" 
+                            x:Name="BtnStart" 
+                            Style="{StaticResource ButtonStyle}" 
+                            Click="BtnStart_Click" 
+                            Visibility="Collapsed"/>
+                    <Button Content="Stop" 
+                            x:Name="Stop" 
+                            Style="{StaticResource ButtonStyle}" 
+                            Click="Stop_Click" 
+                            Visibility="Collapsed"/>
                 </Grid>
             </Grid>
         </Grid>

@@ -146,7 +146,7 @@
     <Compile Include="Pages\RecapitulationPage.xaml.cs">
       <DependentUpon>RecapitulationPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\EditPhotoPage.xaml.cs">
+    <Compile Include="Pages\Predpripravene_pages%28pro_pripadne_rozsireni%29\EditPhotoPage.xaml.cs">
       <DependentUpon>EditPhotoPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\Info\InfoPage.xaml.cs">
@@ -155,7 +155,7 @@
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\SelectImportPage.xaml.cs">
+    <Compile Include="Pages\Predpripravene_pages%28pro_pripadne_rozsireni%29\SelectImportPage.xaml.cs">
       <DependentUpon>SelectImportPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\Setting\SettingInfoPage.xaml.cs">
@@ -249,7 +249,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\EditPhotoPage.xaml">
+    <Page Include="Pages\Predpripravene_pages%28pro_pripadne_rozsireni%29\EditPhotoPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -265,7 +265,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\SelectImportPage.xaml">
+    <Page Include="Pages\Predpripravene_pages%28pro_pripadne_rozsireni%29\SelectImportPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -292,6 +292,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="certCamButton.pfx" />
+    <None Include="Dokuments\Postup instalace aplikace.pptx" />
     <None Include="UwpCamButton_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>

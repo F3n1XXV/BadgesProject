@@ -42,7 +42,8 @@
             <Setter Property="FontSize" Value="{ThemeResource ControlContentThemeFontSize}"/>
             <Setter Property="UseSystemFocusVisuals" Value="{StaticResource UseSystemFocusVisuals}"/>
             <Setter Property="FocusVisualMargin" Value="-3"/>
-            <Setter Property="Template">
+         
+                <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
                         <ContentPresenter x:Name="ContentPresenter" AutomationProperties.AccessibilityView="Raw" BackgroundSizing="{TemplateBinding BackgroundSizing}" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}" ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" CornerRadius="{TemplateBinding CornerRadius}" ContentTransitions="{TemplateBinding ContentTransitions}" HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" Padding="{TemplateBinding Padding}" VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" Background="Black" Height="60" Width="240" Foreground="White" FontSize="26" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold">
