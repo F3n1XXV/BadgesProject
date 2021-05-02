@@ -29,31 +29,29 @@ namespace UwpCamButton
 {
     public sealed partial class RecapitulationPage : Page
     {
-        BindingList<string> typeThings = new BindingList<string>();
-        BindingList<string> countThings = new BindingList<string>();
-        public MainPage mp;
+        private readonly BindingList<string> typeThings = new BindingList<string>()
+        {
+            "Magnet"
+        };
+        private readonly BindingList<string> countThings = new BindingList<string>()
+        {
+            "1","2","3","4","5"
+        };
+        public MainPage Main_Page;
 
         public RecapitulationPage()
         {
             this.InitializeComponent();
             //při přepínání stránek si pamatuje nastavené parametry (pokud je Enabled)
             this.NavigationCacheMode = NavigationCacheMode.Enabled;
-            Window.Current.Activated += Current_Activated;
-
-            typeThings.Add("Magnet");
+            Window.Current.Activated += current_Activated;
             //typeThings.Add("Oznak");
-
-            countThings.Add("1");
-            countThings.Add("2");
-            countThings.Add("3");
-            countThings.Add("4");
-            countThings.Add("5");
 
             cmbType.SelectedIndex = 0;
             cmbCount.SelectedIndex = 0;
 
-            UnregisterForPrinting();
-            RegisterForPrinting();
+            unregisterForPrinting();
+            registerForPrinting();
             //printMan = PrintManager.GetForCurrentView();
             //printMan.PrintTaskRequested += PrintMan_PrintTaskRequested;
 
@@ -65,39 +63,43 @@ namespace UwpCamButton
 
         }
 
-        protected void RegisterForPrinting()
+#pragma warning disable CS0628 // New protected member declared in sealed type
+        protected private void registerForPrinting()
+#pragma warning restore CS0628 // New protected member declared in sealed type
         {
-                printMan = PrintManager.GetForCurrentView();
-                printMan.PrintTaskRequested += PrintMan_PrintTaskRequested;
- 
-                printDoc = new PrintDocument();
-                printDocSource = printDoc.DocumentSource;
-                printDoc.Paginate += PrintDoc_Paginate;
-                printDoc.GetPreviewPage += PrintDoc_GetPreviewPage;
-                printDoc.AddPages += PrintDoc_AddPages;
+            printMan = PrintManager.GetForCurrentView();
+            printMan.PrintTaskRequested += printMan_PrintTaskRequested;
+
+            printDoc = new PrintDocument();
+            printDocSource = printDoc.DocumentSource;
+            printDoc.Paginate += printDoc_Paginate;
+            printDoc.GetPreviewPage += printDoc_GetPreviewPage;
+            printDoc.AddPages += printDoc_AddPages;
         }
 
-        protected void UnregisterForPrinting()
+#pragma warning disable CS0628 // New protected member declared in sealed type
+        protected private void unregisterForPrinting()
+#pragma warning restore CS0628 // New protected member declared in sealed type
         {
             if (printMan == null)
                 return;
 
-            printMan.PrintTaskRequested -= PrintMan_PrintTaskRequested;
-             if (printDoc == null)
+            printMan.PrintTaskRequested -= printMan_PrintTaskRequested;
+            if (printDoc == null)
                 return;
-   
+
             //printDocSource = printDoc.DocumentSource;
-            printDoc.Paginate -= PrintDoc_Paginate;
-            printDoc.GetPreviewPage -= PrintDoc_GetPreviewPage;
-            printDoc.AddPages -= PrintDoc_AddPages;
+            printDoc.Paginate -= printDoc_Paginate;
+            printDoc.GetPreviewPage -= printDoc_GetPreviewPage;
+            printDoc.AddPages -= printDoc_AddPages;
         }
 
         private void loadImage()
         {
-            PictureSave.Source = mp.img;
+            PictureSave.Source = Main_Page.img;
         }
         // toto funguje při activaci page
-        private void Current_Activated(object sender, Windows.UI.Core.WindowActivatedEventArgs e)
+        private void current_Activated(object sender, Windows.UI.Core.WindowActivatedEventArgs e)
         {
             //MainPage.ListActivitiesAdd("Page", "test3");
             if (e.WindowActivationState == CoreWindowActivationState.Deactivated)
@@ -110,10 +112,10 @@ namespace UwpCamButton
             }
         }
         //vrátí stránku na stránku camery
-        private void BtnCapture_Click(object sender, RoutedEventArgs e)
+        private void btnCapture_Click(object sender, RoutedEventArgs e)
         {
             MainPage.ListActivitiesAdd("Camera", "Back page");
-            mp.ChangePage("SelectionImport");
+            Main_Page.ChangePage("SelectionImport");
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -123,9 +125,9 @@ namespace UwpCamButton
                 //mp = MainPage(e.Parameter);
                 //nameRecieved.Text = "Hi " + e.Parameter.ToString();
             }
-            else if (e.Parameter is MainPage)
+            else if (e.Parameter is MainPage page)
             {
-                mp = (MainPage)e.Parameter;
+                Main_Page = page;
             }
 
             loadImage();
@@ -155,7 +157,7 @@ namespace UwpCamButton
             //mp.ChangePage("SelectionImport");
             //!tuto funkci bych chtěl rozeběhnout
             IPAddress ip = Dns.GetHostAddresses(Dns.GetHostName()).First(IPA => IPA.AddressFamily == AddressFamily.InterNetwork);
-            if (mp.IpSetting!= ip.ToString())
+            if (Main_Page.IpSetting != ip.ToString())
             {
                 BtnPrint.IsEnabled = false;
                 btnBack.IsEnabled = false;
@@ -182,36 +184,36 @@ namespace UwpCamButton
                     await encoder.FlushAsync();
                 }
 
-                SocketClient socketTcp = new SocketClient(mp);
+                SocketClientCamButton socketTcp = new SocketClientCamButton(Main_Page);
 
                 IBuffer buffer = await FileIO.ReadBufferAsync(file);
                 byte[] bytes = buffer.ToArray();
 
-                socketTcp.StartClient(mp.IpSetting,mp.Port, cmbCount.SelectedItem.ToString(), bytes);
+                socketTcp.StartClient(Main_Page.IpSetting, Main_Page.Port, cmbCount.SelectedItem.ToString(), bytes);
 
                 MainPage.ListActivitiesAdd("Camera", "Back page");
 
-                mp.ChangePage("SelectionImport");
+                Main_Page.ChangePage("SelectionImport");
 
             }
             else
             {
                 if (PrintManager.IsSupported())
                 {
-              
+
                     await PrintManager.ShowPrintUIAsync();
-                
+
                     //await Windows.Graphics.Printing.PrintManager.P;
-                }                    
+                }
             }
-           
 
 
-           
+
+
 
         }
         //převede obrázek do bytu
-        public async static Task<byte[]> ImageToBytes(BitmapImage image)
+        static public async Task<byte[]> ImageToBytes(BitmapImage image)
         {
             try
             {
@@ -226,10 +228,10 @@ namespace UwpCamButton
                 MainPage.ListActivitiesAdd("Recapitulation", "Error:" + ex.ToString());
                 return null;
             }
-           
+
         }
         //převede byte do image
-        public async static Task<BitmapImage> ImageFromBytes(byte[] bytes)
+        static public async Task<BitmapImage> _ImageFromBytes(byte[] bytes)
         {
             BitmapImage image = new BitmapImage();
             using (InMemoryRandomAccessStream stream = new InMemoryRandomAccessStream())
@@ -244,15 +246,15 @@ namespace UwpCamButton
         private void calculatePrice(object sender, RoutedEventArgs e)
         {
             //přednastavená cena odznáčků
-            int price=70;
+            int price = 70;
             //pokud je nastavený magnet, tak nastaví cenu
             if ((cmbType.SelectedItem?.ToString() ?? "") == "Magnet")
-            {price = 50;}
+                price = 50;
 
             //převede text v comboboxu na číslo(počet navolených oznáčků)
-            int count = int.Parse(cmbCount.SelectedItem.ToString() );
+            int count = int.Parse(cmbCount.SelectedItem.ToString());
             //vypíše vypočítanou cenu
-            txbPriceVal.Text = (count*price).ToString() + " Kč";
+            txbPriceVal.Text = (count * price).ToString() + " Kč";
         }
 
         #region Printer
@@ -261,20 +263,20 @@ namespace UwpCamButton
         private PrintManager printMan;
         private IPrintDocumentSource printDocSource;
 
-        private void PrintDoc_Paginate(object sender, PaginateEventArgs e)
+        private void printDoc_Paginate(object sender, PaginateEventArgs e)
         {
             printDoc.SetPreviewPageCount(int.Parse(cmbCount.SelectedItem.ToString()), PreviewPageCountType.Final);
 
         }
 
-        private void PrintDoc_AddPages(object sender, AddPagesEventArgs e)
+        private void printDoc_AddPages(object sender, AddPagesEventArgs e)
         {
             printDoc.AddPage(SelectPrint);
             printDoc.AddPagesComplete();
 
         }
 
-        private void PrintDoc_GetPreviewPage(object sender, GetPreviewPageEventArgs e)
+        private void printDoc_GetPreviewPage(object sender, GetPreviewPageEventArgs e)
         {
             printDoc.SetPreviewPage(e.PageNumber, SelectPrint);
 
@@ -282,18 +284,18 @@ namespace UwpCamButton
 
         }
 
-        private void PrintMan_PrintTaskRequested(PrintManager sender, PrintTaskRequestedEventArgs args)
+        private void printMan_PrintTaskRequested(PrintManager sender, PrintTaskRequestedEventArgs args)
         {
-            var printTask = args.Request.CreatePrintTask("Print completed", PrintTaskSourceRequested);
-            printTask.Completed += PrintTask_Completed;
+            var printTask = args.Request.CreatePrintTask("Print completed", printTaskSourceRequested);
+            printTask.Completed += printTask_Completed;
         }
 
-        private void PrintTaskSourceRequested(PrintTaskSourceRequestedArgs args)
+        private void printTaskSourceRequested(PrintTaskSourceRequestedArgs args)
         {
             args.SetSource(printDocSource);
         }
 
-        private void PrintTask_Completed(PrintTask sender, PrintTaskCompletedEventArgs args)
+        private void printTask_Completed(PrintTask sender, PrintTaskCompletedEventArgs args)
         {
             //Notifz user that printing has completed
 

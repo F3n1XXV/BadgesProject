@@ -9,8 +9,10 @@ namespace UwpCamButton
 
         public Clock()
         {
-            DispatcherTimer timer = new DispatcherTimer();
-            timer.Interval = TimeSpan.FromSeconds(1);
+            DispatcherTimer timer = new DispatcherTimer()
+            {
+                Interval = TimeSpan.FromSeconds(1)
+            };
             timer.Tick += tick;
             timer.Start();
         }
@@ -45,7 +47,7 @@ namespace UwpCamButton
             }
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
+        public event PropertyChangedEventHandler PropertyChanged ;
 
         void tick(object sender, object e)
         {

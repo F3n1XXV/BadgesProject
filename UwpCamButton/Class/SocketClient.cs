@@ -1,22 +1,20 @@
 ﻿using System;
-using System.Net;
 using System.Net.Sockets;
-using System.Linq;
 using System.Text;
 using System.Threading;
 
 namespace UwpCamButton.Class
 {
-    class SocketClient
+    public class SocketClientCamButton
     {
-        static MainPage mp;
+        static private MainPage _mainPage { get; set; }
         //komunikační protokol
         //private const int port = 49500;
         delegate void txtIpDel(string Ip, MainPage mp);
 
-        public SocketClient(MainPage _mp)
+        public SocketClientCamButton(MainPage mainPage)
         {
-            mp = _mp;
+            _mainPage = mainPage;
         }
         
         //ip adresa zařízení

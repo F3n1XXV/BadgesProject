@@ -147,7 +147,7 @@
                     <Button x:Name="btnBack" 
                             Content="Přefotit" 
                             Style="{StaticResource ButtonStyle}" 
-                            Click="BtnCapture_Click" />
+                            Click="btnCapture_Click" />
                 </Grid>
                 <Grid Grid.Column="0" Grid.Row="1">
                     <StackPanel x:Name="test0" Orientation="Vertical">

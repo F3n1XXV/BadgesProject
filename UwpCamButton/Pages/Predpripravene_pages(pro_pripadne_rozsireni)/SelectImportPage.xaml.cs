@@ -7,7 +7,7 @@ namespace UwpCamButton
 {
     public sealed partial class SelectImportPage : Page
     {
-        public MainPage mainPage;
+        public MainPage Main_Page;
         public readonly List<(string Tag, Type Page, string Name, int Id)> Pages_list = new List<(string Tag, Type Page, string Name, int Id)>
         {
             ("Camera", typeof(CamPage),"LoadCamera",0),
@@ -27,7 +27,7 @@ namespace UwpCamButton
             Type page = Pages_list.Find(x => x.Tag.ToString() == btn.Tag.ToString()).Page;
 
             if (page != null)
-                mainPage.frame1.Navigate(page, this);
+                Main_Page.frame1.Navigate(page, this);
         }
     }
 }
