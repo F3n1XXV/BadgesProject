@@ -6,7 +6,6 @@ namespace UwpCamButton
 {
     class Clock : INotifyPropertyChanged
     {
-
         public Clock()
         {
             DispatcherTimer timer = new DispatcherTimer()
