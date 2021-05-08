@@ -16,7 +16,6 @@ namespace UwpCamButton.Class
         {
             _mainPage = mainPage;
         }
-        
         //ip adresa zařízení
         //public static IPAddress LocalIP
         //{
