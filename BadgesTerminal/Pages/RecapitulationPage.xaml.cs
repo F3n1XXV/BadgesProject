@@ -178,7 +178,7 @@ namespace UwpCamButton
                     await encoder.FlushAsync();
                 }
 
-                SocketClientCamButton socketTcp = new SocketClientCamButton(Main_Page);
+                SocketClientCamButton socketTcp = new SocketClientCamButton();
 
                 IBuffer buffer = await FileIO.ReadBufferAsync(file);
                 byte[] bytes = buffer.ToArray();

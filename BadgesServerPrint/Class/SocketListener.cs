@@ -22,13 +22,14 @@ namespace BadgesServerPrint
             get=> Dns.GetHostAddresses(Dns.GetHostName()).First(IPA=>IPA.AddressFamily==AddressFamily.InterNetwork);
         }
 
+        private int _localPort { get; set; }
         /// <summary>
         ///nastaví preferovaný naslouchací port zařízení
         ///defaultně je nastavený port 49600- (v rozsahu 49152 až 65535, vyhrazené pro dynamické přidělování a soukromé využití, nejsou pevně přiděleny žádné aplikaci)
         /// </summary>
         public int LocalPort
         {
-            get => 49600;
+            get => _localPort;
         }
 
         public SocketListener(Form1 fm)
@@ -38,8 +39,9 @@ namespace BadgesServerPrint
             DelDgwAdd = new DelDgwAddText(fm.AddDgwAction);
         }
         //naslouchání příchozích zpráv
-        public void StartListening()
+        public void StartListening(int localPort)
         {
+            _localPort = localPort;
             //socket služba
             Socket receiveSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
             //nastavení připojovacího uzlu
@@ -47,18 +49,20 @@ namespace BadgesServerPrint
             //připojovací uzel
             receiveSocket.Bind(hostIpEndPoint);
             //nastaví počet, kolik může být připojených/naslouchaných zařízení
-            receiveSocket.Listen(10);
+            receiveSocket.Listen(1);
+            EventLoging.Info(1, "Start server." + LocalIP.ToString() + ":" + LocalPort.ToString());
+            DelDgwAdd("Start server:" + LocalIP.ToString() +":" + LocalPort.ToString());
+            
 
-            DelDgwAdd("Start server");
             while (true)
             {
                 //čeká na vytvořené připojení
                 hostSocket = receiveSocket.Accept();
-                //*vytvoří vlákno naslouchání
+                //*vytvoří vlákno na naslouchání
                 Thread thread = new Thread(new ThreadStart(threadImage));
                 thread.IsBackground = true;
                 thread.Start();
-                //!vytvoří vlákno naslouchání
+                //!vytvoří vlákno na naslouchání
             }
         }
         //čtení obrázku
@@ -93,14 +97,19 @@ namespace BadgesServerPrint
 
                     ms.Close();
                     DelDgwAdd("Load image.");
+                  
+                    EventLoging.Info(2, "Load image.");
                     MyPrintClass mPrint = new MyPrintClass(mainForm,img, countPagesPrint);
                     DelDgwAdd("Start print.");
+                    EventLoging.Info(3, "Start print.");
                 }
                 //!naslouchání od klienta
             }
-            catch (Exception ee)
+            catch (Exception ex)
             {
-                DelDgwAdd("Error:"+ ee);
+                DelDgwAdd("Error:"+ ex);
+
+                EventLoging.Error(1, ex.ToString());
             }
         }
     }

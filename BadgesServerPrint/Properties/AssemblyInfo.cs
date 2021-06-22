@@ -6,9 +6,9 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("ServerPrintButton")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("SW slouží k tisku z aplikace BadgesTerminal.(pro případ,že by bylo použito zařízení s Win. IoT)")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("MiS-LBC")]
 [assembly: AssemblyProduct("ServerPrintButton")]
 [assembly: AssemblyCopyright("Copyright ©  2020")]
 [assembly: AssemblyTrademark("")]

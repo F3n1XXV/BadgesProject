@@ -26,12 +26,12 @@ namespace clEventLoggingUWP
         #region  Messiges
         //if the order of the methods don’t match ordinal number position in the class it would fail generating ETW traces.
         //The EventSource has dependency on the order of the methods in the class.
+
         [Event(1, Level = EventLevel.Informational)]
         public static void Info(int id, string message)
         {
             writeTrace("info","Info(" + id.ToString() + "):" + message, LoggingLevel.Information); ;
         }
-
         [Event(2, Level = EventLevel.Warning)]
         public static void Warning(int id, string message)
         {
@@ -43,7 +43,6 @@ namespace clEventLoggingUWP
         {
             writeTrace("Error","Error(" + id.ToString() + "):" +message,LoggingLevel.Error);
         }
-
         [Event(4, Level = EventLevel.Informational)]
         public static void SQLTrace(int id, string message)
         {
@@ -64,9 +63,6 @@ namespace clEventLoggingUWP
             fileLoggingSession = new FileLoggingSession(NameSource + "_session" + DateTime.Now.ToString("_yyyy_MM_dd_HH_mm_ss"));
         }
 
-
-
-
         private static async void writeTrace(string channelName,string message,LoggingLevel logLevel)
         {
             loggingChannel = new LoggingChannel(channelName, new LoggingChannelOptions());
@@ -76,6 +72,11 @@ namespace clEventLoggingUWP
             loggingChannel.LogMessage(message, logLevel);
 
             await fileLoggingSession.CloseAndSaveToFileAsync();
+        }
+
+        private static void clearFileEventLog()
+        { 
+        
         }
     }
 }

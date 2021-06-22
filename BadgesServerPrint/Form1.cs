@@ -10,6 +10,7 @@ namespace BadgesServerPrint
     public partial class Form1 : Form
     {
         //DelDgwAddText DelDgwAdd;
+        const int portServer = 49600;
         private SocketListener server;
         //nastaví maximální počet řádků v dgw
         const int countRowsDgw = 100;
@@ -19,7 +20,7 @@ namespace BadgesServerPrint
 
             //*vytvořá server a předá požadovaný parametr a následně pustí v jiném vlákně naslouchání
             server = new SocketListener(this);
-            Task t1 = new Task(server.StartListening);
+            Task t1 = new Task(()=>server.StartListening (portServer));
             t1.Start();
             //!vytvořá server a předá požadovaný parametr a následně pustí v jiném vlákně naslouchání
         }
