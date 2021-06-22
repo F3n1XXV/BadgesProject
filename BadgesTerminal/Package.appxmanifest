@@ -9,7 +9,7 @@
   <Identity
     Name="d5aa7e2e-00e9-47fd-adde-e0cc8b682787"
     Publisher="CN=MiSKey"
-    Version="1.4.11.0" />
+    Version="1.0.0.0" />
 
   <mp:PhoneIdentity PhoneProductId="d5aa7e2e-00e9-47fd-adde-e0cc8b682787" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 

@@ -10,11 +10,16 @@ namespace BadgesServerPrint.Class
 
         static EventLoging()
         {
-            source = "Application";
-            sLog = "Application";
+            try
+            {
+                source = "BadgesServerPrint";
+                sLog = "BadgesServerPrint";
 
-            if (!EventLog.SourceExists(source))
-                EventLog.CreateEventSource(source, sLog);
+                if (!EventLog.SourceExists(source))
+                    EventLog.CreateEventSource(source, sLog);
+            }
+            catch (Exception)
+            {}
         }
 
 
@@ -40,8 +45,7 @@ namespace BadgesServerPrint.Class
                 EventLog.WriteEntry(source, message, eventType, id);
             }
             catch (Exception)
-            {
-            }
+            {}
         }
     }
 }

@@ -11,16 +11,19 @@ namespace BadgesServerPrint
     {
         //DelDgwAddText DelDgwAdd;
         const int portServer = 49600;
+        const int countRowsDgw = 100;
         private SocketListener server;
         //nastaví maximální počet řádků v dgw
-        const int countRowsDgw = 100;
+
+        private Task t1;
         public Form1()
         {
             InitializeComponent();
 
             //*vytvořá server a předá požadovaný parametr a následně pustí v jiném vlákně naslouchání
             server = new SocketListener(this);
-            Task t1 = new Task(()=>server.StartListening (portServer));
+            
+            t1 = new Task(()=>server.StartListening (portServer));
             t1.Start();
             //!vytvořá server a předá požadovaný parametr a následně pustí v jiném vlákně naslouchání
         }
@@ -49,6 +52,13 @@ namespace BadgesServerPrint
                 dataGridView1.Rows.Add(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.sss"), Description);
             });
             //!Spustí delegáta asynchronně ve vlákně, v němž byl vytvořen příslušný popisovač ovládacího prvku.
+        }
+
+        //v případě ukončení programu vypne naslouchání a hlavní vlákno naslouchcího socketu
+        private void Form1_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            server.BblListen = false ;
+            t1.Dispose();
         }
     }
 }

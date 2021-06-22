@@ -12,10 +12,12 @@ namespace BadgesServerPrint
 {
     class SocketListener
     {
-        private DelDgwAddText DelDgwAdd;
-        private Form1 mainForm;
+        private DelDgwAddText DelDgwAdd{get; set;}
+        private Form1 mainForm{get; set;}
         //MyPrintClass mPrint;
-        private Socket hostSocket;
+        private Socket hostSocket{get; set;}
+        //ovladací bool pro cyklus naslouchání
+        public bool BblListen{get;set;}
         //nastaví první lokální IP adresu zařízení 
         public IPAddress LocalIP
         {
@@ -34,6 +36,7 @@ namespace BadgesServerPrint
 
         public SocketListener(Form1 fm)
         {
+            BblListen = true;
             this.mainForm = fm;
             //vytvoří delegáta pro předávání informací do datagriedviewru
             DelDgwAdd = new DelDgwAddText(fm.AddDgwAction);
@@ -54,7 +57,7 @@ namespace BadgesServerPrint
             DelDgwAdd("Start server:" + LocalIP.ToString() +":" + LocalPort.ToString());
             
 
-            while (true)
+            while (BblListen)
             {
                 //čeká na vytvořené připojení
                 hostSocket = receiveSocket.Accept();

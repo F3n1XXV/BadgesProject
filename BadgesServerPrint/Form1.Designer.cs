@@ -71,6 +71,7 @@
             // 
             // lblConnect
             // 
+            this.lblConnect.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lblConnect.AutoSize = true;
             this.lblConnect.Location = new System.Drawing.Point(13, 425);
             this.lblConnect.Name = "lblConnect";
@@ -80,6 +81,7 @@
             // 
             // lblVersion
             // 
+            this.lblVersion.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.lblVersion.AutoSize = true;
             this.lblVersion.Location = new System.Drawing.Point(645, 425);
             this.lblVersion.Name = "lblVersion";
@@ -98,6 +100,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
             this.Text = "Badges-ServerPrint";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Form1_FormClosed);
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
