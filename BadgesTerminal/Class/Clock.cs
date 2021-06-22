@@ -55,7 +55,7 @@ namespace UwpCamButton
         //každou vteřinu systém změní čas a dojde k notifikaci změny
         private void tick(object sender, object e)
         {
-            if (PropertyChanged != null) PropertyChanged(this, new PropertyChangedEventArgs("CurentRelTime"));
+            if (PropertyChanged != null) PropertyChanged(this, new PropertyChangedEventArgs("CurentRealTime"));
         }
     }
 }
