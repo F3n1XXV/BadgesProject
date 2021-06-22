@@ -1,0 +1,205 @@
+﻿<Page x:Class="UwpCamButton.MainPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:local="using:UwpCamButton"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:Custom="using:Microsoft.Toolkit.Uwp.UI.Controls"
+      mc:Ignorable="d"
+      Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+      Width="1366"
+      Height="700">
+    <Page.Resources>
+        <JumpListItemBackgroundConverter x:Key="JumpListItemBackgroundConverter" />
+
+        <Style x:Key="txtStyleClock"
+               TargetType="TextBlock">
+            <Setter Property="Foreground"
+                    Value="White" />
+            <Setter Property="FontWeight"
+                    Value="Bold" />
+            <Setter Property="FontSize"
+                    Value="32" />
+            <Setter Property="HorizontalTextAlignment"
+                    Value="Left" />
+            <Setter Property="VerticalAlignment"
+                    Value="Center" />
+            <Setter Property="TextAlignment"
+                    Value="Center" />
+            <Setter Property="Width"
+                    Value="240" />
+            <Setter Property="Height"
+                    Value="80" />
+            <Setter Property="TextWrapping"
+                    Value="Wrap" />
+            <Setter Property="Margin"
+                    Value="70,0,0,10" />
+            <Setter Property="IsHoldingEnabled"
+                    Value="False" />
+            <Setter Property="IsRightTapEnabled"
+                    Value="False" />
+            <Setter Property="IsHoldingEnabled"
+                    Value="False" />
+            <Setter Property="IsDoubleTapEnabled"
+                    Value="False" />
+        </Style>
+
+        <Style x:Name="btnStyle"
+               TargetType="Button"
+               BasedOn="{StaticResource ButtonStyle}">
+            <Setter Property="HorizontalAlignment"
+                    Value="Center" />
+        </Style>
+    </Page.Resources>
+
+    <Grid x:Name="MainGrid"
+          Background="Black">
+        <Grid.DataContext>
+            <local:Clock />
+        </Grid.DataContext>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="140" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="80" />
+        </Grid.RowDefinitions>
+        <Grid x:Name="FirstGrid"
+              Grid.Column="0"
+              Grid.Row="0">
+
+            <Image x:Name="image"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center"
+                   Width="950"
+                   Source="/Assets/NadpisMagnetkyAOznačky.png">
+                <Image.FocusVisualPrimaryBrush>
+                    <ImageBrush />
+                </Image.FocusVisualPrimaryBrush>
+            </Image>
+
+            <TextBlock x:Name="txbClock"
+                       Text="{Binding CurentRealTime}"
+                       Style="{StaticResource txtStyleClock}"
+                       HorizontalAlignment="Left" />
+            <StackPanel x:Name="panelLanguage"
+                        Orientation="Vertical"
+                        HorizontalAlignment="Right"
+                        Margin="0,0,20,0"
+                        Visibility="Collapsed">
+                <TextBlock x:Name="txbLanguage"
+                           HorizontalAlignment="Center"
+                           Text="Language"
+                           TextWrapping="Wrap"
+                           VerticalAlignment="Center" />
+                <ComboBox x:Name="cmbLanguage"
+                          Width="250"
+                          Height="80"
+                          DisplayMemberPath="Source" />
+            </StackPanel>
+        </Grid>
+        <Grid x:Name="SecondGrid"
+              Grid.Column="0"
+              Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="250" />
+                <ColumnDefinition Width="auto" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+
+            </Grid.RowDefinitions>
+            <Grid x:Name="Navigation0"
+                  Grid.Column="0"
+                  Grid.Row="0">
+                <StackPanel x:Name="panelMenu"
+                            Orientation="Vertical"
+                            VerticalAlignment="Bottom"
+                            Width="250">
+                    <!--menu pro výběr funkcionality-->
+                    <Button x:Name="btnInfo"
+                            Tag="Info"
+                            Content="Info and tutorial"
+                            Style="{StaticResource btnStyle}"
+                            Click="btnSelectView_Click"
+                            Visibility="Collapsed" />
+                    <Button x:Name="btnTutorial"
+                            Tag="Tutorial"
+                            Content="Tutorial"
+                            Style="{StaticResource btnStyle}"
+                            Click="btnSelectView_Click"
+                            Visibility="Collapsed" />
+                    <Button x:Name="btnLoadData"
+                            Tag="SelectionImport"
+                            Content="Kamera"
+                            Style="{StaticResource btnStyle}"
+                            Click="btnSelectView_Click" />
+                    <Button x:Name="btnEditPhoto"
+                            Tag="EditPhoto"
+                            Content="Edit photo"
+                            Style="{StaticResource btnStyle}"
+                            Click="btnSelectView_Click"
+                            Visibility="Collapsed" />
+                    <Button x:Name="btnSettingPrint"
+                            Tag="SettingPrint"
+                            Content="Setting print"
+                            Style="{StaticResource btnStyle}"
+                            Click="btnSelectView_Click"
+                            Visibility="Collapsed" />
+                    <Button x:Name="btnRecapitulation"
+                            Tag="Recapitulation"
+                            Content="Souhrn"
+                            Style="{StaticResource btnStyle}"
+                            Click="btnSelectView_Click"
+                            Visibility="Collapsed" />
+                    <Button x:Name="btnSettingInfo"
+                            Tag="SettingInfo"
+                            Content="SettingInfo"
+                            Style="{StaticResource btnStyle}"
+                            Click="btnSelectView_Click"
+                            Visibility="Collapsed" />
+                    <!--!menu pro výběr funkcionality-->
+                    <Image x:Name="image1"
+                           Height="auto"
+                           Width="auto"
+                           Source="/Assets/Strom_zivota_2.png"
+                           VerticalAlignment="Bottom"
+                           HorizontalAlignment="Center" />
+
+                    <TextBlock x:Name="textBlock1"
+                               TextWrapping="Wrap"
+                               Foreground="White"
+                               TextAlignment="Center"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Bottom"
+                               FontSize="32">
+                        <Run Text="1 Magnetek" /><LineBreak />
+                        <Run Text="=" /> <LineBreak />
+                        <Run Text="1 Kč pro českou přírodu" />
+                    </TextBlock>
+                    <Button x:Name="btnSetting"
+                            Tag="Setting"
+                            Content="£"
+                            Margin="20,0,0,0"
+                            Width="23"
+                            Height="20"
+                            FontSize="5"
+                            Click="btnSelectView_Click"
+                            Background="Black"
+                            Foreground="White" />
+                </StackPanel>
+            </Grid>
+            <Grid x:Name="Navigation"
+                  Grid.Column="1"
+                  Grid.Row="0">
+                <Frame x:Name="frame1"
+                       x:FieldModifier="public"
+                       Width="1110"
+                       Height="554" />
+            </Grid>
+        </Grid>
+    </Grid>
+</Page>
+
+    

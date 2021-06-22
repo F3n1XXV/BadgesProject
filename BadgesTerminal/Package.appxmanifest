@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<Package
+  xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10"
+  xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest"
+  xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10"
+  IgnorableNamespaces="uap mp">
+
+  <Identity
+    Name="d5aa7e2e-00e9-47fd-adde-e0cc8b682787"
+    Publisher="CN=MiSKey"
+    Version="1.4.11.0" />
+
+  <mp:PhoneIdentity PhoneProductId="d5aa7e2e-00e9-47fd-adde-e0cc8b682787" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
+
+  <Properties>
+    <DisplayName>BadgesTerminal</DisplayName>
+    <PublisherDisplayName>MiS</PublisherDisplayName>
+    <Logo>Assets\Title\StoreLogo.png</Logo>
+  </Properties>
+
+  <Dependencies>
+    <TargetDeviceFamily Name="Windows.Universal" MinVersion="10.0.0.0" MaxVersionTested="10.0.0.0" />
+  </Dependencies>
+
+  <Resources>
+    <Resource Language="x-generate"/>
+  </Resources>
+
+  <Applications>
+    <Application Id="App"
+      Executable="$targetnametoken$.exe"
+      EntryPoint="BadgesTerminal.App">
+      <uap:VisualElements
+        DisplayName="BadgesTerminal"
+        Square150x150Logo="Assets\Title\Square150x150Logo.png"
+        Square44x44Logo="Assets\Title\Square44x44Logo.png"
+        Description="BadgesTerminal vzniknul projekt pro kámoše, co se zabívá výrobou oznáčků."
+        BackgroundColor="transparent">
+        <uap:DefaultTile Wide310x150Logo="Assets\Title\Wide310x150Logo.png" Square71x71Logo="Assets\Title\SmallTile.png" Square310x310Logo="Assets\Title\LargeTile.png">
+          <uap:ShowNameOnTiles>
+            <uap:ShowOn Tile="wide310x150Logo"/>
+          </uap:ShowNameOnTiles>
+        </uap:DefaultTile >
+        <uap:SplashScreen Image="Assets\Title\SplashScreen.png"/>
+      </uap:VisualElements>
+    <!--<Extensions>
+        <uap5:Extension 
+          Category="windows.appExecutionAlias"
+          Executable="UwpCamButton.exe"
+          EntryPoint="UwpCamButton.App">
+          <uap5:AppExecutionAlias>
+            <uap5:ExecutionAlias Alias="UwpCamButton.exe"/>
+          </uap5:AppExecutionAlias>
+        </uap5:Extension>
+      </Extensions>-->
+      
+    </Application>
+  </Applications>
+
+  <Capabilities>
+    <uap:Capability Name="picturesLibrary"/>
+    <Capability Name="privateNetworkClientServer"/>
+    <Capability Name="internetClient"/>
+    <DeviceCapability Name="webcam"/>
+  </Capabilities>
+</Package>
