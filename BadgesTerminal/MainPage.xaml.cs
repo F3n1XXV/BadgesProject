@@ -31,7 +31,7 @@ namespace UwpCamButton
         public string IpSetting;
         public int Port = 49600;
 
-        EventLogging eventLog = new EventLogging("ButtonTerminal");
+        private EventLogging eventLog = new EventLogging("ButtonTerminal");
 
         public static string LastNamePicture
         {
@@ -80,7 +80,7 @@ namespace UwpCamButton
         public MainPage()
         {
             InitializeComponent();
-            eventLog.Info("Start aplication");
+            EventLogging.Info(1,"Start aplication");
             //vybere první defaultní jazyk
             cmbLanguage.SelectedIndex = 1;
           
@@ -168,7 +168,6 @@ namespace UwpCamButton
                 default:
                 {
                         throw new NotImplementedException("Unidentified Language");
-                   
                 }
             }
         }

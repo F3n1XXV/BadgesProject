@@ -1,4 +1,5 @@
-﻿using System;
+﻿using clEventLoggingUWP;
+using System;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading;
@@ -46,17 +47,20 @@ namespace UwpCamButton.Class
                 clientSocket.Send(buffer, buffer.Length, SocketFlags.None);
                 //clientSocket.Close();
             }
-            catch (ArgumentNullException e)
+            catch (ArgumentNullException ex)
             {
-                MainPage.ListActivitiesAdd("Socket", "ArgumentNullException:" + e);
+                MainPage.ListActivitiesAdd("Socket", "ArgumentNullException:" + ex);
+                EventLogging.Error(2, "ArgumentNullException:" + ex.ToString());
             }
-            catch (SocketException e)
+            catch (SocketException ex)
             {
-                MainPage.ListActivitiesAdd("Socket", "SocketException:" + e);
+                MainPage.ListActivitiesAdd("Socket", "SocketException:" + ex);
+                EventLogging.Error(3, "SocketException:" + ex.ToString());
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
-                MainPage.ListActivitiesAdd("Socket", "Exception:" + e);
+                MainPage.ListActivitiesAdd("Socket", "Exception:" + ex);
+                EventLogging.Error(4, "Exception:" + ex.ToString());
             }
         }
     }

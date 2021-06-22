@@ -10,6 +10,7 @@ using Windows.Storage;
 using System.Threading.Tasks;
 using Windows.UI.Xaml.Media.Imaging;
 using Windows.Storage.Streams;
+using clEventLoggingUWP;
 
 namespace UwpCamButton
 {
@@ -66,10 +67,6 @@ namespace UwpCamButton
             else if (e.Parameter is RecapitulationPage)
             {
                 recapitulationPage = (RecapitulationPage)e.Parameter;
-            }
-            else
-            {
-                //nameRecieved.Text = "Hi ";
             }
         }
         //tlačítko pro zapnutí kamery(není potřeba, jelikož se aplikace spouští puštěná)
@@ -168,6 +165,7 @@ namespace UwpCamButton
                     catch (Exception ex)
                     {
                         MainPage.ListActivitiesAdd("Camera", "Error:" + ex.ToString());
+                        EventLogging.Error(1, ex.ToString());
                     }
                 }
 
