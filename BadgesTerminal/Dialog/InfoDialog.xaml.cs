@@ -1,12 +1,13 @@
 ﻿using Windows.UI.Xaml.Controls;
 
-namespace UwpCamButton
+
+namespace BadgesTerminal.Dialog
 {
-    public sealed partial class PasswordDialog : ContentDialog
+    public sealed partial class InfoDialog : ContentDialog
     {
-        public PasswordDialog()
+        public InfoDialog()
         {
-            //this.InitializeComponent();
+            this.InitializeComponent();
         }
 
         private void ContentDialog_PrimaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)

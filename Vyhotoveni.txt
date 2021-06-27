@@ -1,0 +1,15 @@
+Vyhotoveni:
+Projekt jsem rozdìlil na dvì èásti
+
+První èást 
+SW pro záznam fotek z web kamery a tisku fotografie.
+SW je navržen na architektuøe UWP, která je možné spouštìt i na PC, na kterých bìží Windows IoT.
+V pøípadì, že SW je spuštìn na operaèním systému x86 nebo x64, tak je možné tisknout fotografie bez nutnosti instalace serveru pro tisk.
+
+
+Druhá èást
+Server pro tisk fotografií. 
+Tento server vzniknul z dùvodu, kdyby byl použit pro záznam fotografií mini poèítaè s procesorem ARM.
+Tyto procesory nejsou podporovány výrobci tiskáren, proto není možné z nich tisknout.
+Proto vznikla i tato druhá èást projektu, kde server po pøíchodu dat vytiskne obrázek.
+Je potøeba, aby daný SW bìžel na systému s procesorem x84 nebo x64 Windows.

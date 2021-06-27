@@ -82,7 +82,8 @@
             <TextBlock x:Name="txbClock"
                        Text="{Binding CurentRealTime}"
                        Style="{StaticResource txtStyleClock}"
-                       HorizontalAlignment="Left" />
+                       HorizontalAlignment="Left"
+                       Margin="0,0,0,0"/>
             <StackPanel x:Name="panelLanguage"
                         Orientation="Vertical"
                         HorizontalAlignment="Right"

@@ -111,7 +111,6 @@ namespace BadgesServerPrint
             catch (Exception ex)
             {
                 DelDgwAdd("Error:"+ ex);
-
                 EventLoging.Error(1, ex.ToString());
             }
         }

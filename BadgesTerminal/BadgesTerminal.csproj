@@ -133,6 +133,13 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Class\SocketClient.cs" />
+    <Compile Include="Class\ValueAppLocalSetting.cs" />
+    <Compile Include="Dialog\InfoDialog.xaml.cs">
+      <DependentUpon>InfoDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Dialog\Password_Dialog.xaml.cs">
+      <DependentUpon>Password_Dialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\LoadData\Predpripravene_pages%28pro_pripadne_rozsireni%29\BluetoothPage.xaml.cs">
       <DependentUpon>BluetoothPage.xaml</DependentUpon>
     </Compile>
@@ -163,9 +170,6 @@
     </Compile>
     <Compile Include="Pages\Setting\SettingPage.xaml.cs">
       <DependentUpon>SettingPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Dialog\PasswordDialog.xaml.cs">
-      <DependentUpon>PasswordDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Pages\LoadData\Predpripravene_pages%28pro_pripadne_rozsireni%29\SDcardPage.xaml.cs">
@@ -237,6 +241,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="Dialog\InfoDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Dialog\Password_Dialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\LoadData\Predpripravene_pages%28pro_pripadne_rozsireni%29\BluetoothPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -281,17 +293,13 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Dialog\PasswordDialog.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
       <Version>6.2.12</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.Toolkit.Uwp.UI.Controls">
-      <Version>7.0.1</Version>
+      <Version>7.0.2</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup>

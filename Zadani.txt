@@ -1,0 +1,5 @@
+Zadání:
+-systém by mìl umìt tisknout foto z webcamery
+-tiskárna obyèejná 
+-fotografie by mìla být kruhového prùøezu
+-by mìl být levný

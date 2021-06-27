@@ -10,6 +10,7 @@ using System.Net.Sockets;
 using System.Net;
 using System.Linq;
 using clEventLoggingUWP;
+using BadgesTerminal.Dialog;
 
 namespace UwpCamButton
 {
@@ -105,9 +106,9 @@ namespace UwpCamButton
         {
             if (NextPage== "Setting")
             {
+                string psw = await InputTextDialogAsync();
                 //*nastavení hesla z důvodu, aby se na danou stranku nedostal kde kdo
-                string pasword= await InputTextDialogAsync("Password");
-                if (pasword == "button")
+                if (psw == "button")
                 {
                     Type page = ListPages.Find(x => x.Tag.ToString() == NextPage).Page;
                     frame1.Navigate(page, this);
@@ -125,18 +126,22 @@ namespace UwpCamButton
         /// </summary>
         /// <param name="title"></param>
         /// <returns></returns>
-        private async Task<string> InputTextDialogAsync(string title)
+        /// 
+        //string pasword = await InputTextDialogAsync("Password");
+        private async Task<string> InputTextDialogAsync()
         {
-            TextBox inputTextBox = new TextBox();
-            inputTextBox.AcceptsReturn = false;
-            inputTextBox.Height = 32;
-            PasswordDialog dialog = new PasswordDialog();
-            dialog.Content = inputTextBox;
-            dialog.Title = title;
-            dialog.IsSecondaryButtonEnabled = true;
-            dialog.PrimaryButtonText = "Ok";
-            dialog.SecondaryButtonText = "Cancel";
-            return (await dialog.ShowAsync() == ContentDialogResult.Primary) ? inputTextBox.Text:"";
+           
+            Password_Dialog dialog = new Password_Dialog();
+            //dialog.Content = inputTextBox;
+            //dialog.Title = title;
+            //dialog.IsSecondaryButtonEnabled = true;
+            //dialog.PrimaryButtonText = "Ok";
+            //dialog.SecondaryButtonText = "Cancel";
+
+            await dialog.ShowAsync() ;
+
+
+            return dialog.StrPassword;
         }
 
         //nastavení jazyku

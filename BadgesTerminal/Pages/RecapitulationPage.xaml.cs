@@ -14,9 +14,8 @@ using System.ComponentModel;
 using Windows.Storage.Streams;
 using Windows.Graphics.Printing;
 using Windows.UI.Xaml.Printing;
-using System.Net;
 using System.Linq;
-using System.Net.Sockets;
+using BadgesTerminal.Class;
 
 namespace UwpCamButton
 {
@@ -92,7 +91,7 @@ namespace UwpCamButton
         {
             PictureSave.Source = Main_Page.img;
         }
-        // toto funguje při activaci page
+        // toto funguje při activaci tisku stránky
         private void current_Activated(object sender, Windows.UI.Core.WindowActivatedEventArgs e)
         {
             //MainPage.ListActivitiesAdd("Page", "test3");
@@ -129,29 +128,7 @@ namespace UwpCamButton
         //pošle obrázek na tiskárnu
         private async void printImage_click(object sender, RoutedEventArgs e)
         {
-
-            //tuto funkci bych chtěl rozeběhnout
-            //BtnPrint.IsEnabled = false;
-            //btnBack.IsEnabled = false;
-
-            //RenderTargetBitmap rtb = new RenderTargetBitmap();
-            //await rtb.RenderAsync(SelectPrint);
-
-            //byte[] bytes = await ImageToBytes(rtb);
-
-            ////byte[] bytes = await ImageToBytes(image);
-            //SocketClient socketTcp = new SocketClient(mp);
-            //socketTcp.StartClient("192.168.0.107", cmbCount.SelectedItem.ToString(), bytes);
-
-            //MainPage.ListActivitiesAdd("Camera", "Back page");
-
-            ////PictureSave.Source = null;
-            //mp.ChangePage("SelectionImport");
-            //!tuto funkci bych chtěl rozeběhnout
-
-
-            IPAddress ip = Dns.GetHostAddresses(Dns.GetHostName()).First(IPA => IPA.AddressFamily == AddressFamily.InterNetwork);
-            if (Main_Page.IpSetting != ip.ToString())
+            if (ValueAppLocalSetting.TypePrint=="TCP/IP")
             {
                 BtnPrint.IsEnabled = false;
                 btnBack.IsEnabled = false;
@@ -162,7 +139,7 @@ namespace UwpCamButton
                 var pixelBuffer = await rtb.GetPixelsAsync();
                 var pixels = pixelBuffer.ToArray();
                 var displayInformation = DisplayInformation.GetForCurrentView();
-                var file = await ApplicationData.Current.LocalFolder.CreateFileAsync("testImage" + ".jpg", CreationCollisionOption.ReplaceExisting);
+                var file = await ApplicationData.Current.LocalFolder.CreateFileAsync("sendImage" + ".jpg", CreationCollisionOption.ReplaceExisting);
 
                 using (var stream = await file.OpenAsync(FileAccessMode.ReadWrite))
                 {
@@ -183,7 +160,7 @@ namespace UwpCamButton
                 IBuffer buffer = await FileIO.ReadBufferAsync(file);
                 byte[] bytes = buffer.ToArray();
 
-                socketTcp.StartClient(Main_Page.IpSetting, Main_Page.Port, cmbCount.SelectedItem.ToString(), bytes);
+                socketTcp.StartClient(ValueAppLocalSetting.strIP, ValueAppLocalSetting.Port, cmbCount.SelectedItem.ToString(), bytes);
 
                 MainPage.ListActivitiesAdd("Camera", "Back page");
 

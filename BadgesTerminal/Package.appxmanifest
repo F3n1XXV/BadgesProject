@@ -15,7 +15,7 @@
 
   <Properties>
     <DisplayName>BadgesTerminal</DisplayName>
-    <PublisherDisplayName>MiS</PublisherDisplayName>
+    <PublisherDisplayName>MiS-LBC</PublisherDisplayName>
     <Logo>Assets\Title\StoreLogo.png</Logo>
   </Properties>
 

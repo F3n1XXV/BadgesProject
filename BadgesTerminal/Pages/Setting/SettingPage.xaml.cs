@@ -1,4 +1,6 @@
-﻿using System;
+﻿using BadgesTerminal.Class;
+using System;
+using System.Collections.Generic;
 using System.Net;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -9,24 +11,20 @@ namespace UwpCamButton.Pages
     public delegate void txtIpDel(string Ip, MainPage mp);
     public sealed partial class SettingPage : Page
     {
-        //txtIpDel delTxtIp = new txtIpDel(ChangeTextIp);
-        public string IpSetting = "000.000.000.000";
         MainPage mainPage;
 
         public SettingPage()
         {
             this.InitializeComponent();
+
+            cmbPrintType.SelectedItem = ValueAppLocalSetting.TypePrint;
         }
 
-        private void btnIp_Click(object sender, RoutedEventArgs e)
+        private List<string> listTypePrint = new List<string>
         {
-            //IpSetting = txtIp.Text;
-        }
+        "TCP/IP","Local"
+        };
 
-        public static void ChangeTextIp(string ip, MainPage mp)
-        {
-            //IpSetting = txtIp.Text;
-        }
 
         private void btnSettingInfoPage_Click(object sender, RoutedEventArgs e)
         {
@@ -36,42 +34,73 @@ namespace UwpCamButton.Pages
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            if (e.Parameter is string)
-            {
-                //mp = MainPage(e.Parameter);
-                //nameRecieved.Text = "Hi " + e.Parameter.ToString();
-            }
-            else if (e.Parameter is MainPage)
+            if (e.Parameter is MainPage)
             {
                 mainPage = (MainPage)e.Parameter;
-                //txtIp.Text = "IP:(" + mp.IpSetting + ")";
-                //txtPort.Text = "Port:(" + mp.Port + ")";
 
-                txbPort.Text = mainPage.Port.ToString();
-                txbIp.Text = mainPage.IpSetting;
+                cmbPrintType.SelectedItem = ValueAppLocalSetting.TypePrint;
+                txbIp.Text = ValueAppLocalSetting.strIP;
+                txbPort.Text = ValueAppLocalSetting.Port.ToString();          
             }
-
         }
 
-        private void txbPort_TextChanged(object sender, TextChangedEventArgs e)
+        //uloží proměné do lokální paměti aplikace
+        private void btnSave_Click(object sender, RoutedEventArgs e)
         {
-            try
+            ValueAppLocalSetting.TypePrint = cmbPrintType.SelectedItem.ToString();
+
+            if (cmbPrintType.SelectedItem=="TCP/IP")
             {
-                mainPage.Port = int.Parse(txbPort.Text);
+                //*port není jako IP, tak přeruší ukládání
+                try
+                {
+                    IPAddress ip = IPAddress.Parse(txbIp.Text);
+                    mainPage.IpSetting = ip.ToString();
+                }
+                catch (Exception)
+                { 
+
+                    return;
+                }
+                //!port není jako IP    , tak přeruší ukládání
+
+                //*port není jako číslo, tak přeruší ukládání
+                try
+                {
+                    mainPage.Port = int.Parse(txbPort.Text);
+                }
+                catch (Exception)
+                {
+                    return;
+                }
+                //!port není jako číslo, tak přeruší ukládání
+                ValueAppLocalSetting.strIP =txtIp.ToString();
+                ValueAppLocalSetting.Port = int.Parse(txbPort.Text);
             }
-            catch (Exception)
-            {}
         }
 
-        private void txbIp_TextChanged(object sender, TextChangedEventArgs e)
+        private void cmbPrintType_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            try
+            Visibility visibleObj = Visibility.Visible;
+
+            switch (cmbPrintType.SelectedItem.ToString())
             {
-                IPAddress ip = IPAddress.Parse(txbIp.Text);
-                mainPage.IpSetting = ip.ToString();
+                case "Local":
+                    visibleObj = Visibility.Collapsed;
+                    break;
             }
-            catch (Exception)
-            {}
+
+            if (txtIp != null)
+                txtIp.Visibility = visibleObj;
+
+            if (txbIp != null)
+                txbIp.Visibility = visibleObj;
+
+            if (txtPort!=null)
+                txtPort.Visibility = visibleObj;
+
+            if (txbPort != null)
+                txbPort.Visibility = visibleObj;
         }
     }
 }
