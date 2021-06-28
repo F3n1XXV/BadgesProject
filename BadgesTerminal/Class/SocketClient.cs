@@ -15,7 +15,7 @@ namespace UwpCamButton.Class
         /// <param name="port"></param>
         /// <param name="countPages"></param>
         /// <param name="buffer"></param>
-        public void StartClient(String serverIp,int port, String countPages, Byte[] buffer)
+        public void StartClient(string serverIp,int port, string countPages, Byte[] buffer)
         {
             try
             {
@@ -34,7 +34,7 @@ namespace UwpCamButton.Class
                 //!převod a odeslání zprávy na server
 
                 //prodleva mezi odeslání textu a obrázku
-                //bezpečnostní pojistka, z důvodu, kdyby nedařilo odeslat text
+                //bezpečnostní pojistka, z důvodu, kdyby se nedařilo odeslat text
                 Thread.Sleep(1000);
 
                 //odeslání obrázku

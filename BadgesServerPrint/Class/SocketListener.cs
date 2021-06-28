@@ -87,14 +87,14 @@ namespace BadgesServerPrint
 
                 //*naslouchání od klienta
                 //nastavení maximální velikosti příchozí zprávy
-                byte[] c = new byte[1024*1024*2];
+                byte[] maxSizeMessage = new byte[1024*1024*2];
                 //velikost naslouchaného souboru(obrázku)
-                int dataSize = dataSize = hostSocket.Receive(c, 0, c.Length, SocketFlags.None);
+                int dataSize = hostSocket.Receive(maxSizeMessage, 0, maxSizeMessage.Length, SocketFlags.None);
                 
                 if (dataSize > 0)
                 {
                     //přeložení bytů do memory streamu
-                    MemoryStream ms = new MemoryStream(c, 0, dataSize, true);
+                    MemoryStream ms = new MemoryStream(maxSizeMessage, 0, dataSize, true);
                     //přeloží paměť bytů do obrázku
                     Image img = Image.FromStream(ms);
 
