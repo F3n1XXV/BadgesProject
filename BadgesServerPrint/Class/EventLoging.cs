@@ -22,17 +22,29 @@ namespace BadgesServerPrint.Class
             {}
         }
 
-
+        /// <summary>
+        /// Max id=3
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="message"></param>
         public static void Info(int id, string message)
         {
             write(id, message,EventLogEntryType.Information);
         }
-
+        /// <summary>
+        /// Max id=0
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="message"></param>
         public static void Warning(int id, string message)
         {
             write(id, message,EventLogEntryType.Warning);
         }
-
+        /// <summary>
+        /// Max id=2
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="message"></param>
         public static  void Error(int id, string message)
         {
             write(id, message,EventLogEntryType.Error);

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BadgesServerPrint.Class;
+using System;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -15,7 +16,7 @@ namespace BadgesServerPrint
         private SocketListener server;
         //nastaví maximální počet řádků v dgw
 
-        private Task t1;
+        private Task task;
         public Form1()
         {
             InitializeComponent();
@@ -23,8 +24,8 @@ namespace BadgesServerPrint
             //*vytvořá server a předá požadovaný parametr a následně pustí v jiném vlákně naslouchání
             server = new SocketListener(this);
             
-            t1 = new Task(()=>server.StartListening (portServer));
-            t1.Start();
+            task = new Task(()=>server.StartListening (portServer));
+            task.Start();
             //!vytvořá server a předá požadovaný parametr a následně pustí v jiném vlákně naslouchání
         }
         //metoda při spuštění formuláře
@@ -57,8 +58,15 @@ namespace BadgesServerPrint
         //v případě ukončení programu vypne naslouchání a hlavní vlákno naslouchcího socketu
         private void Form1_FormClosed(object sender, FormClosedEventArgs e)
         {
-            server.BblListen = false ;
-            t1.Dispose();
+            try
+            {
+                server.BblListen = false ;
+                task.Dispose();
+            }
+            catch (Exception ex)
+            {
+                EventLoging.Error(2, ex.ToString());
+            }
         }
     }
 }
