@@ -29,8 +29,6 @@ namespace UwpCamButton
         public static int TransferX;
         public static int TransferY;
         //!nastavení obrázku pro fotku
-        public string IpSetting;
-        public int Port = 49600;
 
         private EventLogging eventLog = new EventLogging("ButtonTerminal");
 
@@ -60,8 +58,15 @@ namespace UwpCamButton
         /// <param name="description"></param>
         public static void ListActivitiesAdd(string name,string description)
         {
-            ListActivities.RemoveAll(x=> x.DateAction<DateTime.Now.AddHours(-1));
-            ListActivities.Add(new Activity(name, description));
+            try
+            {
+                ListActivities.RemoveAll(x=> x.DateAction<DateTime.Now.AddHours(-1));
+                ListActivities.Add(new Activity(name, description));
+            }
+            catch (Exception ex)
+            {
+                EventLogging.Warning(1, ex.ToString());
+            }
         }
 
         public static readonly List<(string Tag, Type Page, string Name, int Id)> ListPages = new List<(string Tag, Type Page, string Name, int Id)>
@@ -85,10 +90,10 @@ namespace UwpCamButton
             //vybere první defaultní jazyk
             cmbLanguage.SelectedIndex = 1;
           
-            //při startu nastaví předefinovanou stránku
+            //při startu nastaví předdefinovanou stránku
             ChangePage("SelectionImport");
-            IPAddress ip = Dns.GetHostAddresses(Dns.GetHostName()).First(IPA => IPA.AddressFamily == AddressFamily.InterNetwork);
-            IpSetting = ip.ToString();
+            //IPAddress ip = Dns.GetHostAddresses(Dns.GetHostName()).First(IPA => IPA.AddressFamily == AddressFamily.InterNetwork);
+            //IpSetting = ip.ToString();
         }
 
         //funkce pro přepínání stránek

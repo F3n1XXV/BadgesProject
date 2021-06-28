@@ -74,7 +74,7 @@ namespace BadgesServerPrint
             try
             {
                 //nastaví po jak dlouhé době má přestat naslouchání
-                hostSocket.ReceiveTimeout=1000;
+                hostSocket.ReceiveTimeout=10000;
                 //*naslouchání od klienta
                 //prvně naslouchá string(počet stránek)
                 byte[] m = new byte[17];// velikost chartu se udává podle poštu znaků ((počet znaků*7bytů)+10)
@@ -89,7 +89,7 @@ namespace BadgesServerPrint
                 //nastavení maximální velikosti příchozí zprávy
                 byte[] maxSizeMessage = new byte[1024*1024*2];
                 //velikost naslouchaného souboru(obrázku)
-                int dataSize = hostSocket.Receive(maxSizeMessage, 0, maxSizeMessage.Length, SocketFlags.None);
+                int dataSize = hostSocket.Receive(maxSizeMessage);
                 
                 if (dataSize > 0)
                 {

@@ -47,15 +47,16 @@ namespace UwpCamButton.Pages
         //uloží proměné do lokální paměti aplikace
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
-            ValueAppLocalSetting.TypePrint = cmbPrintType.SelectedItem.ToString();
+            int selectIndex = cmbPrintType.SelectedIndex;
+            ValueAppLocalSetting.TypePrint = listTypePrint[selectIndex].ToString();
 
-            if (cmbPrintType.SelectedItem=="TCP/IP")
+            if (listTypePrint[selectIndex].ToString() == "TCP/IP")
             {
                 //*port není jako IP, tak přeruší ukládání
+                IPAddress ip;
                 try
                 {
-                    IPAddress ip = IPAddress.Parse(txbIp.Text);
-                    mainPage.IpSetting = ip.ToString();
+                    ip = IPAddress.Parse(txbIp.Text);
                 }
                 catch (Exception)
                 { 
@@ -65,17 +66,18 @@ namespace UwpCamButton.Pages
                 //!port není jako IP    , tak přeruší ukládání
 
                 //*port není jako číslo, tak přeruší ukládání
+                int port;
                 try
                 {
-                    mainPage.Port = int.Parse(txbPort.Text);
+                    port = int.Parse(txbPort.Text);
                 }
                 catch (Exception)
                 {
                     return;
                 }
                 //!port není jako číslo, tak přeruší ukládání
-                ValueAppLocalSetting.strIP =txtIp.ToString();
-                ValueAppLocalSetting.Port = int.Parse(txbPort.Text);
+                ValueAppLocalSetting.strIP =ip.ToString();
+                ValueAppLocalSetting.Port = port;
             }
         }
 

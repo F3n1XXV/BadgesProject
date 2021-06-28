@@ -124,6 +124,8 @@ namespace UwpCamButton
             }
 
             loadImage();
+            BtnPrint.IsEnabled = true;
+            btnBack.IsEnabled = true;
         }
         //pošle obrázek na tiskárnu
         private async void printImage_click(object sender, RoutedEventArgs e)
@@ -174,6 +176,9 @@ namespace UwpCamButton
                     //await Windows.Graphics.Printing.PrintManager.P;
                 }
             }
+
+            BtnPrint.IsEnabled = true;
+            btnBack.IsEnabled = true;
         }
 
         /// <summary>

@@ -37,7 +37,6 @@ namespace clEventLoggingUWP
         {
             writeTrace("Warning","Warning(" + id.ToString() + "):" + message, LoggingLevel.Warning);
         }
-
         [Event(3, Level = EventLevel.Error)]
         public static void Error(int id, string message)
         {
@@ -65,13 +64,21 @@ namespace clEventLoggingUWP
 
         private static async void writeTrace(string channelName,string message,LoggingLevel logLevel)
         {
-            loggingChannel = new LoggingChannel(channelName, new LoggingChannelOptions());
+            try
+            {
 
-            fileLoggingSession.AddLoggingChannel(loggingChannel, logLevel);
+                 loggingChannel = new LoggingChannel(channelName, new LoggingChannelOptions());
 
-            loggingChannel.LogMessage(message, logLevel);
+                fileLoggingSession.AddLoggingChannel(loggingChannel, logLevel);
 
-            await fileLoggingSession.CloseAndSaveToFileAsync();
+                loggingChannel.LogMessage(message, logLevel);
+
+                await fileLoggingSession.CloseAndSaveToFileAsync();           }
+            catch (Exception)
+            {
+
+
+            }
         }
 
         private static void clearFileEventLog()

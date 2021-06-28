@@ -21,14 +21,17 @@ namespace BadgesServerPrint.Class
 
             //* nastavení velikosti obrázku
             // obrázek se zmenšuje/zvětšuje oproti původnímu rozlišení
-            int width = (int)(_img.Width/3.2);
-            int height = (int)(_img.Height/3.2); //3.25 je 56 mm 3.2 je 57mm
+           
+            int width = (int)(_img.Width );
+            int height = (int)(_img.Height); 
             img = resizeImage(_img, new Size(width, height));
             //! nastavení velikosti obrázku
 
             //*nastavení print dokumentu
             printDocument = new PrintDocument();
             printDocument.DocumentName = "Button";
+            printDocument.DefaultPageSettings.Landscape = true ;
+           ;
             printDocument.PrintPage += SettingPictureOnPage;
             printDocument.BeginPrint += new PrintEventHandler(pd_BeginPrint);
             printDocument.PrintPage += new PrintPageEventHandler(pd_PrintPage);
@@ -65,8 +68,8 @@ namespace BadgesServerPrint.Class
             //https://toolstud.io/photo/dpi.php?width=10&width_unit=cm&height=15&height_unit=cm&dpi=360&bleed=0&bleed_unit=mm
             printDocument.DefaultPageSettings.PaperSize = new PaperSize("100 x 150 mm", 822, 1182); //788;758;795
             //pd.DefaultPageSettings.PaperSize = new PaperSize("210 x 297 mm", 800, 800);
-            //nastavení orientace pepíru
-            printDocument.DefaultPageSettings.Landscape =true;
+            //nastavení orientace pepíru true=na šířku
+            printDocument.DefaultPageSettings.Landscape =false;
         }
         //vykoná činnost při začátku tisku
         private void pd_BeginPrint(object beginPrintSender, PrintEventArgs beginPrintE)
